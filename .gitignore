@@ -128,6 +128,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+target
+.visivo_cache
 .env
 .venv
 env/
@@ -172,3 +174,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+staging/

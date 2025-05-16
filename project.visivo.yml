@@ -1,0 +1,47 @@
+path: project
+name: dbt_artifacts
+defaults:
+  source_name: Example Source
+  threads: 8
+  thumbnail_mode: missing
+  levels: []
+cli_version: 1.0.58
+includes: []
+destinations: []
+alerts: []
+sources:
+  - name: Example Source
+    database: staging/local.db
+    type: duckdb
+    connection_pool_size: 1
+models:
+  - name: Example Model
+    sql: select * from dim_dbt__current_models
+traces:
+  - model: ${ref(Example Model)}
+    name: Example Trace
+    order_by:
+      - ?{count(*) desc}
+    props:
+      type: bar
+      x: ?{materialization}
+      y: ?{count(*)}
+tables: []
+charts:
+  - layout:
+      title:
+        text: Types of Models
+    name: Example Chart
+    traces:
+      - ${ref(Example Trace)}
+selectors: []
+dashboards:
+  - name: Overall Dbt Performance
+    tags: []
+    level: 0
+    type: internal
+    rows:
+      - height: medium
+        items:
+          - width: 1
+            chart: ${ref(Example Chart)}
