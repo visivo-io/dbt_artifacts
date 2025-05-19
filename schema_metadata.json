@@ -1,0 +1,1145 @@
+{
+  "generated_at": "2025-05-16T13:46:38.661147",
+  "tables": {
+    "dim_dbt__current_models": {
+      "columns": [
+        {
+          "name": "model_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "database",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "depends_on_nodes",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "package_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "path",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "checksum",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "materialization",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "tags",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "meta",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "last_full_refresh_run_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "last_full_refresh_run_total_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "last_full_refresh_run_rows_affected",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "last_run_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "last_run_total_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "last_run_rows_affected",
+          "type": "BIGINT",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "last_incremental_run_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "last_incremental_run_total_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "last_incremental_run_rows_affected",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 259
+    },
+    "dim_dbt__exposures": {
+      "columns": [
+        {
+          "name": "exposure_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "type",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "owner",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "maturity",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "path",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "description",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "url",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "package_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "depends_on_nodes",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "tags",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 21412
+    },
+    "dim_dbt__models": {
+      "columns": [
+        {
+          "name": "model_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "database",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "depends_on_nodes",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "package_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "path",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "checksum",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "materialization",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "tags",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "meta",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        }
+      ],
+      "row_count": 1274592
+    },
+    "dim_dbt__seeds": {
+      "columns": [
+        {
+          "name": "seed_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "database",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "package_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "path",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "checksum",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "meta",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        }
+      ],
+      "row_count": 49064
+    },
+    "dim_dbt__snapshots": {
+      "columns": [
+        {
+          "name": "snapshot_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "database",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "depends_on_nodes",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "package_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "path",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "checksum",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "strategy",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "meta",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        }
+      ],
+      "row_count": 26412
+    },
+    "dim_dbt__sources": {
+      "columns": [
+        {
+          "name": "source_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "database",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "source_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "loader",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "identifier",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "loaded_at_field",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "freshness",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        }
+      ],
+      "row_count": 1672782
+    },
+    "dim_dbt__tests": {
+      "columns": [
+        {
+          "name": "test_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "depends_on_nodes",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "package_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "test_path",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "tags",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 8287263
+    },
+    "fct_dbt__invocations": {
+      "columns": [
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "dbt_version",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "project_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "dbt_command",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "full_refresh_flag",
+          "type": "BOOLEAN",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "target_profile_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "target_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "target_schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "target_threads",
+          "type": "BIGINT",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "dbt_cloud_project_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "dbt_cloud_job_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "dbt_cloud_run_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "dbt_cloud_run_reason_category",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "dbt_cloud_run_reason",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "env_vars",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "dbt_vars",
+          "type": "INTEGER",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "invocation_args",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "dbt_custom_envs",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 5352
+    },
+    "fct_dbt__model_executions": {
+      "columns": [
+        {
+          "name": "model_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "was_full_refresh",
+          "type": "BOOLEAN",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "thread_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "compile_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "query_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "total_node_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "rows_affected",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "materialization",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "message",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 1137221
+    },
+    "fct_dbt__seed_executions": {
+      "columns": [
+        {
+          "name": "seed_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "was_full_refresh",
+          "type": "BOOLEAN",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "thread_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "compile_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "query_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "total_node_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "rows_affected",
+          "type": "BIGINT",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "materialization",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "message",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        }
+      ],
+      "row_count": 43993
+    },
+    "fct_dbt__snapshot_executions": {
+      "columns": [
+        {
+          "name": "snapshot_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "was_full_refresh",
+          "type": "BOOLEAN",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "thread_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "compile_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "query_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "total_node_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "rows_affected",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "materialization",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "schema",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "alias",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "message",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 23798
+    },
+    "fct_dbt__test_executions": {
+      "columns": [
+        {
+          "name": "test_execution_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "command_invocation_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "node_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "run_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "was_full_refresh",
+          "type": "BOOLEAN",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "thread_id",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "compile_started_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "query_completed_at",
+          "type": "TIMESTAMP_NS",
+          "nullable": true,
+          "is_date": true
+        },
+        {
+          "name": "total_node_runtime",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "rows_affected",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "failures",
+          "type": "DOUBLE",
+          "nullable": true,
+          "is_date": false
+        },
+        {
+          "name": "message",
+          "type": "VARCHAR",
+          "nullable": true,
+          "is_date": false
+        }
+      ],
+      "row_count": 7536412
+    }
+  }
+}
