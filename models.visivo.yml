@@ -120,15 +120,22 @@ models:
       GROUP BY m.name, m.materialization
       ORDER BY avg_runtime DESC
       LIMIT 10
-
-  - name: invocation_times
+  - name: flakiest_models_past_three_months
     sql: |
       SELECT 
-        i.run_started_at,
-        SUM(e.total_node_runtime) as total_runtime
-      FROM fct_dbt__invocations i
-      JOIN fct_dbt__model_executions e ON i.command_invocation_id = e.command_invocation_id
-      GROUP BY i.run_started_at
+        m.name,
+        m.materialization,
+        COUNT(distinct case when e.status = 'success' THEN e.model_execution_id else null end) as model_successes,
+        COUNT(distinct case when e.status = 'error' THEN e.model_execution_id else null end) as model_errors,
+        COALESCE(model_successes,0) + COALESCE(model_errors, 0)  as execution_count, 
+        1 - (model_successes / execution_count) as error_rate
+
+      FROM fct_dbt__model_executions e
+      JOIN dim_dbt__models m ON e.model_execution_id = m.model_execution_id
+      WHERE e.run_started_at > (CURRENT_DATE - INTERVAL '3 months')
+      GROUP BY m.name, m.materialization
+      ORDER BY error_rate desc
+      LIMIT 10
 
   # Adding new base table models
   - name: fct_dbt__model_executions
