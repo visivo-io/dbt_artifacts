@@ -1,0 +1,106 @@
+models: 
+  - name: fct_dbt__invocations
+    sql: | 
+      select * from fct_dbt__invocations
+
+  - name: model_executions
+    sql: |
+      SELECT 
+        m.name,
+        m.materialization,
+        m.schema,
+        e.status,
+        e.total_node_runtime,
+        e.rows_affected,
+        e.run_started_at,
+        e.was_full_refresh
+      FROM fct_dbt__model_executions e
+      JOIN dim_dbt__models m ON e.model_execution_id = m.model_execution_id
+
+  - name: test_executions
+    sql: |
+      SELECT 
+        t.name,
+        e.status,
+        e.total_node_runtime,
+        e.failures,
+        e.run_started_at
+      FROM fct_dbt__test_executions e
+      JOIN dim_dbt__tests t ON e.test_execution_id = t.test_execution_id
+
+  - name: model_materializations
+    sql: |
+      SELECT 
+        materialization,
+        COUNT(*) as count
+      FROM dim_dbt__current_models
+      GROUP BY materialization
+
+  - name: slowest_model_runtimes_this_week
+    sql: |
+      SELECT 
+        m.name,
+        m.materialization,
+        AVG(e.total_node_runtime) as avg_runtime,
+        MAX(e.total_node_runtime) as max_runtime,
+        COUNT(*) as execution_count
+      FROM fct_dbt__model_executions e
+      JOIN dim_dbt__models m ON e.model_execution_id = m.model_execution_id
+      WHERE e.run_started_at > (CURRENT_DATE - INTERVAL '1 week')
+      GROUP BY m.name, m.materialization
+      ORDER BY avg_runtime DESC
+      LIMIT 10
+
+  - name: invocation_times
+    sql: |
+      SELECT 
+        i.run_started_at,
+        SUM(e.total_node_runtime) as total_runtime
+      FROM fct_dbt__invocations i
+      JOIN fct_dbt__model_executions e ON i.command_invocation_id = e.command_invocation_id
+      GROUP BY i.run_started_at
+
+  # Adding new base table models
+  - name: fct_dbt__model_executions
+    sql: |
+      select * from fct_dbt__model_executions
+
+  - name: fct_dbt__test_executions
+    sql: |
+      select * from fct_dbt__test_executions
+
+  - name: fct_dbt__seed_executions
+    sql: |
+      select * from fct_dbt__seed_executions
+
+  - name: fct_dbt__snapshot_executions
+    sql: |
+      select * from fct_dbt__snapshot_executions
+
+  - name: dim_dbt__models
+    sql: |
+      select * from dim_dbt__models
+
+  - name: dim_dbt__tests
+    sql: |
+      select * from dim_dbt__tests
+
+  - name: dim_dbt__sources
+    sql: |
+      select * from dim_dbt__sources
+
+  - name: dim_dbt__seeds
+    sql: |
+      select * from dim_dbt__seeds
+
+  - name: dim_dbt__snapshots
+    sql: |
+      select * from dim_dbt__snapshots
+
+  - name: dim_dbt__exposures
+    sql: |
+      select * from dim_dbt__exposures
+
+  - name: dim_dbt__current_models
+    sql: |
+      select * from dim_dbt__current_models

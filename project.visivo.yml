@@ -1,47 +1,262 @@
 path: project
-name: dbt_artifacts
+name: dbt_artifacts_visuals
+
 defaults:
-  source_name: Example Source
+  source_name: dbt_artifacts
   threads: 8
   thumbnail_mode: missing
   levels: []
+
 cli_version: 1.0.58
-includes: []
+includes:
+  - path: "models.visivo.yml"
 destinations: []
 alerts: []
 sources:
-  - name: Example Source
+  - name: dbt_artifacts
     database: staging/local.db
     type: duckdb
     connection_pool_size: 1
-models:
-  - name: Example Model
-    sql: select * from dim_dbt__current_models
+
+models: []
+  
 traces:
-  - model: ${ref(Example Model)}
-    name: Example Trace
+  - name: total_dbt_build_invocations_this_week
+    model: ${ref(fct_dbt__invocations)}
+    columns: 
+      invocations: count(distinct command_invocation_id)
+      period: date_trunc('week', run_started_at) 
+    props:
+      type: indicator
+      value: column(invocations)[0]
+      title: 
+        text: This Week
+      delta: 
+        reference: column(invocations)[1]
     order_by:
-      - ?{count(*) desc}
+      - ?{date_trunc('week', run_started_at::date) desc}
+    
+  - name: model_materialization_distribution
+    model: ${ref(model_materializations)}
+    props:
+      type: pie
+      labels: ?{materialization}
+      values: ?{count}
+      textinfo: label+percent
+      hole: .5
+
+  - name: daily_avg_invocation_time
+    model: ${ref(invocation_times)}
+    props:
+      type: scatter
+      x: ?{date_trunc('week', run_started_at)::varchar}
+      y: ?{avg(total_runtime)}
+      mode: lines
+      line:
+        shape: spline
+    order_by:
+      - ?{date_trunc('week', run_started_at)::varchar asc }
+
+  - name: top_slow_models
+    model: ${ref(slowest_model_runtimes_this_week)}
     props:
       type: bar
-      x: ?{materialization}
-      y: ?{count(*)}
-tables: []
+      x: ?{name}
+      marker: 
+        opacity: ?{CASE WHEN materialization = 'incremental' then .7 else 1 end}
+      y: ?{avg_runtime}
+    filters:
+      - ?{ avg_runtime > 20}
+    order_by:
+      - ?{ avg_runtime desc }
+
+  - name: test_failures
+    model: ${ref(test_executions)}
+    cohort_on: status
+    props:
+      type: scatter
+      x: ?{date_trunc('day', run_started_at)::varchar}
+      y: ?{SUM(failures)}
+      mode: markers
+
 charts:
-  - layout:
+  - name: total_dbt_build_invocations_this_week_chart
+    traces: 
+      - ${ref(total_dbt_build_invocations_this_week)}
+    layout:
+      title: 
+        text: Dbt Build Invocations
+  - name: Model Materialization Distribution
+    layout:
       title:
-        text: Types of Models
-    name: Example Chart
+        text: Distribution of Model Materializations
+      margin: 
+        b: 10
+        t: 60
+        r: 10
+        l: 10
+      showlegend: false
     traces:
-      - ${ref(Example Trace)}
-selectors: []
+      - ${ref(model_materialization_distribution)}
+
+  - name: Top 10 Slowest Models
+    layout:
+      title:
+        text: Top 10 Models by Average Runtime
+      yaxis:
+        title:
+          text: Average Runtime (seconds)
+      margin: 
+        b: 100 
+    traces:
+      - ${ref(top_slow_models)}
+
+  - name: Test Failures Over Time
+    layout:
+      title:
+        text: Test Failures Over Time
+      yaxis:
+        title:
+          text: Number of Failures
+    traces:
+      - ${ref(test_failures)}
+
+  - name: Daily Average Invocation Time
+    layout:
+      title:
+        text: Daily Average dbt Run Time
+      yaxis:
+        title:
+          text: Average Runtime (seconds)
+    traces:
+      - ${ref(daily_avg_invocation_time)}
+
 dashboards:
-  - name: Overall Dbt Performance
+  - name: DBT Performance Overview
     tags: []
     level: 0
     type: internal
     rows:
+      - height: compact
+        items: 
+          - markdown: | 
+              ## High-Level Summary
+            align: center 
+      - height: small 
+        name: "High-Level Summary"
+        items: 
+          - chart: ${ref(total_dbt_build_invocations_this_week_chart)}
+          - markdown: Success Rate (runs passed over runs triggered)
+            justify: center
+            align: center
+          - markdown: Average Run Duration (period over period comp)
+            justify: center
+            align: center
+          - markdown: Total Tests Executed
+            justify: center
+            align: center
+          - markdown: Total Test Pass rate
+            justify: center
+            align: center
+      - height: compact
+        items: 
+          - markdown: | 
+              ## Run-Level Trends
+            align: center 
+      - height: medium 
+        name: "Run-Level Trends"
+        items: 
+          - markdown: Daily/Weekly Run Count & Success vs Failure
+            justify: center
+            align: center
+          - markdown: Average Run Duration Over Time
+            justify: center
+            align: center
+          - markdown: Run Duration Distribution Heatmap
+            justify: center
+            align: center
+      - height: compact
+        items: 
+          - markdown: | 
+              ## Model-Level Diagnostics
+            align: center 
       - height: medium
+        name: "Model-Level Diagnostics"
         items:
-          - width: 1
-            chart: ${ref(Example Chart)}
+          - markdown: Top 10 Slowest Models
+            justify: center
+            align: center
+          - markdown: Model Duration Distribution
+            justify: center
+            align: center
+          - markdown: Model Failure Rates
+            justify: center
+            align: center
+      - height: compact
+        items: 
+          - markdown: | 
+              ## Test & Quality Checks
+            align: center 
+      - height: medium
+        name: "Test & Quality Checks"
+        items:
+          - markdown: Tests by Type (schema, data, custom)
+            justify: center
+            align: center
+          - markdown: Recent Test Failures
+            justify: center
+            align: center
+          - markdown: Freshness Checks (for seeds/snapshots/sources)
+            justify: center
+            align: center
+      - height: compact
+        items: 
+          - markdown: | 
+              ## Resource & Environment Metrics
+            align: center 
+      - height: medium
+        name: "Resource & Environment Metrics"
+        items:
+          - markdown: CPU/Memory Utilization During Runs
+            justify: center
+            align: center
+          - markdown: Run Duration by Environment
+            justify: center
+            align: center
+          - markdown: Resource Contention Analysis
+            justify: center
+            align: center
+      - height: compact
+        items: 
+          - markdown: | 
+              ## DAG Dependency View
+            align: center 
+      - height: medium
+        name: "DAG Dependency View"
+        items:
+          - markdown: Interactive Graph of dbt DAG
+            justify: center
+            align: center
+          - markdown: Color-coded nodes by performance
+            justify: center
+            align: center
+          - markdown: Dependency Impact Analysis
+            justify: center
+            align: center
+      - height: compact
+        items: 
+          - markdown: | 
+              ## Alerts & Anomalies
+            align: center 
+      - height: medium
+        name: "Alerts & Anomalies"
+        items:
+          - markdown: Run Duration Anomalies
+            justify: center
+            align: center
+          - markdown: Failure Rate Spikes
+            justify: center
+            align: center
+          - markdown: Recent Error Feed
+            justify: center
+            align: center
