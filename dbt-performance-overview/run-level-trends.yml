@@ -11,50 +11,51 @@ charts:
         b: 40
         r: 40
         l: 65
-      showlegend: false 
-    selector: 
-      name: period 
+      showlegend: false
+    selector:
+      name: period
       type: single
     traces:
       - name: average-succesful-runtime-daily
         cohort_on: "'Daily'"
         model: ${ref(build_invocation_summary)}
-        props: 
+        props:
           type: scatter
           mode: lines
-          line: 
+          line:
             shape: spline
           x: ?{date_trunc('day', run_started_at)::varchar}
           y: ?{round(avg(ms_run_time)/(60*1000), 1)}
-        filters: 
+          fill: tonextx
+        filters:
           - ?{build_succeeded = true}
         order_by:
           - ?{date_trunc('day', run_started_at)}
       - name: average-succesful-runtime-weekly
         cohort_on: "'Weekly'"
         model: ${ref(build_invocation_summary)}
-        props: 
+        props:
           type: scatter
           mode: lines
-          line: 
+          line:
             shape: spline
           x: ?{date_trunc('week', run_started_at)::varchar}
           y: ?{round(avg(ms_run_time)/(60*1000), 1)}
-        filters: 
+        filters:
           - ?{build_succeeded = true}
         order_by:
           - ?{date_trunc('week', run_started_at)}
       - name: average-succesful-runtime-monthly
         cohort_on: "'Monthly'"
         model: ${ref(build_invocation_summary)}
-        props: 
+        props:
           type: scatter
           mode: lines
-          line: 
+          line:
             shape: spline
           x: ?{date_trunc('month', run_started_at)::varchar}
           y: ?{round(avg(ms_run_time)/(60*1000), 1)}
-        filters: 
+        filters:
           - ?{build_succeeded = true}
         order_by:
           - ?{date_trunc('month', run_started_at)}
@@ -72,19 +73,19 @@ charts:
         r: 65
         l: 65
       showlegend: false
-      yaxis2: 
-        title: 
+      yaxis2:
+        title:
           text: Pass Rate
-        overlaying: 'y' 
+        overlaying: 'y'
         side: right
-        showgrid: false 
-        tickformat: ".0%" 
+        showgrid: false
+        tickformat: ".0%"
     traces:
       - name: model-success-rate-per-week
         cohort_on: "'Success Rate'"
         model: ${ref(build_invocation_summary)}
-        props: 
-          type: bar 
+        props:
+          type: bar
           x: ?{date_trunc('week', run_started_at)::varchar}
           y: ?{SUM(model_successes) / SUM(model_run_attempts)}
           yaxis: y2
@@ -94,18 +95,18 @@ charts:
       - name: number-of-models-over-time
         cohort_on: "'Models'"
         model: ${ref(build_invocation_summary)}
-        props: 
+        props:
           type: scatter
           mode: lines+markers
-          line: 
-            shape: spline 
+          line:
+            shape: spline
           x: ?{date_trunc('week', run_started_at)::varchar}
           y: ?{round(SUM(model_run_attempts) / COUNT(distinct command_invocation_id))}
-        filters: 
+        filters:
           - ?{build_succeeded = true}
         order_by:
           - ?{date_trunc('week', run_started_at)}
-      
+
 
   - name: Tests Over Time
     layout:
@@ -114,26 +115,25 @@ charts:
       yaxis:
         title:
           text: Tests
-      yaxis2: 
-        title: 
+      yaxis2:
+        title:
           text: Pass Rate
-        overlaying: 'y' 
+        overlaying: 'y'
         side: right
-        showgrid: false 
+        showgrid: false
         tickformat: ".0%"
-        
       margin:
         t: 60
         b: 40
         r: 65
         l: 65
-      showlegend: false 
+      showlegend: false
     traces:
       - name: test-success-rate-per-week
         cohort_on: "'Pass Rate'"
         model: ${ref(build_invocation_summary)}
-        props: 
-          type: bar 
+        props:
+          type: bar
           x: ?{date_trunc('week', run_started_at)::varchar}
           y: ?{SUM(test_passes) / SUM(test_run_attempts)}
           yaxis: y2
@@ -143,16 +143,16 @@ charts:
       - name: number-of-tests-over-time
         cohort_on: "'Tests'"
         model: ${ref(build_invocation_summary)}
-        props: 
+        props:
           type: scatter
           mode: lines+markers
-          line: 
-            shape: spline 
+          line:
+            shape: spline
           x: ?{date_trunc('week', run_started_at)::varchar}
           y: ?{round(SUM(test_run_attempts) / COUNT(distinct command_invocation_id))}
-        filters: 
+        filters:
           - ?{build_succeeded = true}
         order_by:
           - ?{date_trunc('week', run_started_at)}
-      
+
 
