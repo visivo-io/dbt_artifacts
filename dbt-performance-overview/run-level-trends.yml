@@ -26,7 +26,7 @@ charts:
             shape: spline
           x: ?{date_trunc('day', run_started_at)::varchar}
           y: ?{round(avg(ms_run_time)/(60*1000), 1)}
-          fill: tonextx
+          fill: tonexty
         filters:
           - ?{build_succeeded = true}
         order_by:

@@ -7,7 +7,7 @@ defaults:
   thumbnail_mode: missing
   levels: []
 
-cli_version: 1.0.58
+cli_version: 1.0.59
 includes:
   - path: "models.visivo.yml"
   - path: "./dbt-performance-overview/high-level-summary.yml"
@@ -40,7 +40,7 @@ dashboards:
               ## High-Level Summary
             align: center
       - height: small
-        name: "High-Level Summary"
+        # name: "High-Level Summary"
         items:
           - chart: ${ref(Number of Models in Last Run)}
           - chart: ${ref(total_dbt_build_invocations_this_week_chart)}
@@ -78,7 +78,7 @@ dashboards:
         name: "Test & Quality Checks"
         items:
           - table: 
-              name: Test Results This Year
+              # name: Test Results This Year
               traces: 
                 - name: tests-that-have-failed-in-production
                   model: ${ref(fct_dbt__test_executions)}
